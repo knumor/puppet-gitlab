@@ -255,7 +255,7 @@ class gitlab (
   else {
     notice('Puppet will not manage the configuration file because $puppet_manage_config is false')
     include ::gitlab::install
-    Class['::gitlab::install']
+    class {'::gitlab::install': }
   }
 
   if $puppet_manage_backups {
