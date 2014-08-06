@@ -248,16 +248,14 @@ class gitlab (
   # Set the order that the manifests are executed in
   if $puppet_manage_config == true {
     notice('Puppet will manage the configuration file because $puppet_manage_config is true')
-    include ::gitlab::prerequisites
     include ::gitlab::install
     include ::gitlab::config
-    Class['::gitlab::prerequisites'] -> Class['::gitlab::install'] -> Class['::gitlab::config']
+    Class['::gitlab::install'] -> Class['::gitlab::config']
   }
   else {
     notice('Puppet will not manage the configuration file because $puppet_manage_config is false')
-    include ::gitlab::prerequisites
     include ::gitlab::install
-      Class['::gitlab::prerequisites'] -> Class['::gitlab::install']
+    Class['::gitlab::install']
   }
 
   if $puppet_manage_backups {
